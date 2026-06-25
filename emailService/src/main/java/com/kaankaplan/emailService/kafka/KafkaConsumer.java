@@ -1,6 +1,7 @@
 package com.kaankaplan.emailService.kafka;
 
 import com.kaankaplan.emailService.business.abstracts.EmailService;
+import com.kaankaplan.emailService.business.concretes.SmsServiceImpl;
 import com.kaankaplan.emailService.dto.EmailMessageKafkaDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -14,6 +15,7 @@ import java.util.Map;
 public class KafkaConsumer {
 
     private final EmailService emailService;
+    private final SmsServiceImpl smsService;
 
     @KafkaListener(topics = "${spring.kafka.topic.name}", groupId = "${spring.kafka.consumer.group-id}")
     public void consume(EmailMessageKafkaDto emailMessageKafkaDto){
@@ -27,5 +29,8 @@ public class KafkaConsumer {
         model.put("chairNumbers", emailMessageKafkaDto.getChairNumbers());
 
         emailService.sendEmail(emailMessageKafkaDto.getSender(), emailMessageKafkaDto.getRecipient(), emailMessageKafkaDto.getSubtitle(), model);
+
+        String smsMessage = "CineVision biletiniz hazir. Film: " + emailMessageKafkaDto.getMovieName() + ", Salon: " + emailMessageKafkaDto.getSaloonName();
+        smsService.sendSms(emailMessageKafkaDto.getPhone(), smsMessage);
     }
 }

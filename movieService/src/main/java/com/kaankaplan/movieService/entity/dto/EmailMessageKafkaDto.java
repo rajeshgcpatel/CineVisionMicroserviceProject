@@ -13,6 +13,7 @@ public class EmailMessageKafkaDto {
 
     private String sender;
     private String recipient;
+    private String phone;
     private String subtitle;
     private String movieName;
     private String saloonName;

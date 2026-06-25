@@ -8,7 +8,7 @@ export default function PaymnetSuccessPage() {
             <h2 className='mt-4'>Ödeme İşlemi Başarılı</h2>
             <hr />
             <h5 className='mt-4'>CineVision'ı tercih ettiğin için teşekkür ederiz. 
-                Ödeme işlemin tamamlandı. Bilet detay bilgilerin email adresine gönderildi.
+                Ödeme işlemin tamamlandı. Bilet detay bilgilerin email adresine ve telefon numaranıza gönderildi.
             </h5>
 
             <h5 className='pt-3'>
